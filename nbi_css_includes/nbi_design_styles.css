@@ -1,0 +1,81 @@
+/*
+ * ----------------------------------------------------------------------------
+ * NBI Layout/Design styles
+ */
+
+body
+        {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 17px;
+        margin: 0;
+        padding: 0;
+        }
+
+h1, h2, h4
+        {
+        text-align: center;
+        color: #ffffff;
+        }
+
+h1
+	{
+	font-size: 2em;
+	line-height: 1em;
+	}
+
+h4 a, h4 a:visited
+        {
+        color: #d9dcec;
+        }
+
+h4 a:hover
+        {
+        color: #ffffff;
+        text-decoration: none;
+        }
+
+h2
+        {
+        font-size: 18px;
+        }
+
+p
+        {
+        margin-top: 0px;
+        margin-bottom: 20px;
+        }
+
+.clear_both
+        {
+        clear: both;
+        }
+
+.code
+	{
+	font-family:"Courier New", Courier, monospace;
+	}
+
+#w3cButtons
+	{
+	width: 196px;
+	margin: 20px auto;
+	padding: 0;
+	}
+	
+#markupBtn
+	{
+	margin: 0 10px 0 0;
+	padding: 0;
+	width: 88px;
+	float: left;
+	}
+	
+#cssBtn
+	{
+	margin: 0 0 0 10px;
+	padding: 0;
+	width: 88px;
+	float: left;
+	}
+	

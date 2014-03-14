@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+
+<style type="text/css">
+
+body
+	{
+	background-image:url(sidebar.left.bg.gif);
+	background-position: top left;
+	background-repeat: repeat-y;
+	margin: 0;
+	padding: 0;
+	
+	/* IE 6.0 Addition */
+	height: 100%;
+	}
+
+/* IE requires the position to be absolute otherwise the div will render below */
+/* the mainContainer div on the page and not under it in the z axis            */
+#bg
+	{
+	position: absolute;
+	background-image: url(sidebar.right.bg_long.gif);
+	background-position: top right;
+	background-repeat: repeat-y;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	min-width: 960px;
+	/* IE 6.0 requires the -1 z-index so that the bg will render behind the scroll bar */
+	z-index: -1;
+	}
+
+body > #bg
+	{
+	position: relative;
+	z-index: 1;
+	}
+
+#mainContainer
+	{
+	position: relative;
+	min-width: 960px;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	}
+	
+#centerRightColumnContainer
+	{
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+	}
+	
+#centerRightColumnPositioner
+	{
+	margin-left: 190px; /* To fit the left side bar */
+	padding: 0;	
+	}
+
+#sideBarLeft
+	{
+	float: left;
+	width: 190px; /* Total width: 190px - padding *2 = 170px; */
+	margin-left: -100%;
+	padding: 0;
+	}
+
+#centerColumnContainer
+	{
+	float: left;
+	width: 100%;
+	}
+
+#centerColumn
+	{
+	margin-right: 260px;
+	padding: 10px;
+	}
+	
+#sideBarRight
+	{
+	float: left;
+	width: 240px; /* Total width: 260 - padding * 2 */
+	margin-left: -260px;
+	padding: 10px;
+	}
+</style>
+
+
+<!--[if IE 7]>
+<style type="text/css">
+/* If we are using IE 7 we must override our position attribute for our #bg div */
+body > #bg
+	{
+	position: absolute;
+	}
+</style>
+<![endif]-->
+
+
+<!--[if (IE 6)|(IE 7)]>
+<script type="text/javascript">
+
+function move_box() {
+	var element = document.getElementById('bg');
+	element.style.top = document.documentElement.scrollTop;
+} // move_box, END
+
+</script>
+<![endif]-->
+
+
+<!--[if IE 6]>
+<script type="text/javascript">
+
+// Should match the min-width set in the css
+var var_minWindowSize = 960;
+
+function windowMinSizeCheck(){
+
+	if( document.documentElement.clientWidth < var_minWindowSize){
+		// We first need to figure out the size of the browser chrome
+		
+		// So that we do not see the interrim window.resizeTo, we will modify our
+		// screen.updateInterval, run our commands and then reset the interval
+		var var_updateInterval_orig = screen.updateInterval;
+		screen.updateInterval = 5000;
+		
+		// alert( "screen.updateInterval = " + screen.updateInterval );
+		
+		// Unsetting our existing onresize callback
+		window.onresize = null;
+		
+		// We'll store the old clientHeight
+		var var_clientHeight_old = document.documentElement.clientHeight;
+		
+		// Then resize the window to a known size
+		window.resizeTo( 400, 400 );
+		
+		// Figure out the difference between the new window size and the
+		// new clientWidth and clientHeight, which is the size of the chrome
+		var var_chromeY = 400 - document.documentElement.clientHeight;
+		var var_chromeX = 400 - document.documentElement.clientWidth;
+		
+		// Resize our window.
+		window.resizeTo( var_minWindowSize + var_chromeX, var_clientHeight_old + var_chromeY );
+		
+		// Restore our onresize callback
+		window.onresize = windowMinSizeCheck;
+		
+		// Restore our updateInterval
+		screen.updateInterval = var_updateInterval_orig;
+	}
+}
+
+window.onscroll = move_box;
+window.onresize = windowMinSizeCheck;
+window.onload = windowMinSizeCheck;
+
+</script>
+<![endif]-->
+
+
+<!--[if IE 7]>
+<script type="text/javascript">
+
+window.onscroll = move_box;
+
+</script>
+<![endif]-->
+
+
+</head>
+
+<body>
+
+	<div id="mainContainer">
+	
+				<!-- The conainter divs for the center and the right columns -->		
+				<div id="centerRightColumnContainer">
+								
+					<div id="centerRightColumnPositioner">
+					
+						<div id="centerColumnContainer">
+						
+							<div id="centerColumn">
+							
+								<!-- IE 6.0 Kludge -->
+								
+								<h1>Practical CSS Layouts that work.</h1>
+                        		<h2>3 Column: Fixed Side-Bars, Liquid Content Area, with Footer, no Header</h2>
+                        		<h4>By: <a href="http://www.ryanchapin.com" target="_blank">Ryan Chapin</a></h4>
+								
+								<img src="rchapin_racing.jpg" style="float:left;" width="150" height="102" border="0" alt="" />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+							</div>
+							<!-- centerColumn, END -->
+						
+						</div>
+						<!-- centerColumnContainer, END -->
+						
+						
+						<div id="sideBarRight">
+							Right<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+						</div>
+						<!-- sideBarRight, END -->
+
+					</div>
+					<!-- centerRightColumnPositioner, END -->		
+						
+				</div>
+				<!-- centerRightColumnContainer, END -->
+			
+
+				<!-- The left column div -->			
+				<div id="sideBarLeft">
+
+					Left
+					<br /><br />
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					
+					<!-- Required so that IE 6.0 doesn't mangle the last entry of content in this column -->
+					<p>&nbsp;</p>
+					
+				</div>
+				<!-- sideBarLeft, END -->
+					
+				<div class="clear_both"></div>
+
+	</div>
+	<!-- mainContainer, END -->
+
+<div id="bg">&nbsp;</div>
+   
+</body>
+</html>

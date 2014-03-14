@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>CSS 2 Column Liquid Layout That Works</title>
+
+<meta name="keywords" content="CSS, layout, design, 2 column, float, floats, clear, clears" />
+<meta name="description" content="A practical liquid 2 column CSS layout with a fixed left-hand side bar and liquid content column that works with dynamic content and is easy to understand and customize." />
+
+
+<style type="text/css">
+
+<?php include( "../nbi_css_includes/css_comment_attribute.html" ); ?>
+
+/* ============================================================================ */
+/* Layout Styles */	
+#mainContainer
+	{
+	min-width: 740px;
+	padding: 0;
+	margin: 0;
+	}
+
+#header
+	{
+	background-color: #0000ac;
+	background-image: url(header.bg.jpg);
+	background-position: top;
+	background-repeat: repeat-x;
+	margin: 0;
+	padding: 10px;
+	}
+		
+/* You must include at least a border-top and border-bottom on this rule.        */
+/* Otherwise IE 6 and IE 7 will not render the background properly.              */
+#sideBarContentWrapper
+	{
+	background-image: url(columns.bg.gif);
+	background-repeat: repeat-y;
+	border-top: #000000 1px solid;
+	border-bottom: #000000 1px solid;
+	}
+	
+#contentContainer
+	{
+	float: left;
+	width: 100%;
+	}
+	
+#content
+	{
+	margin-left: 190px;
+	padding: 10px;
+	}
+
+#sideBar
+	{
+	float: left;
+	width: 190px;
+	margin-left: -100%;
+	}
+
+/* IE 6.0: For some reason, if you just specify padding here it'll add 10 px  */
+/* to the entire layout and cause the page to scroll horizontally. So we have */
+/* to specify the width and then set a margin on it.  The width is equal to   */
+/* the width of the column, 190px - the 10px margin * 2                       */
+#sideBar p
+        {
+        margin: 10px auto;
+        width: 170px;
+        }
+
+#sideBarContentWrapper > #sideBar p
+	{
+	padding: 10px;
+	margin: 0;
+	}
+
+/* We have to include some sort of height attribute for IE 6 and 7 to render  */
+/* the columns background properly, and prevent additional, unwanted          */
+/* whitespace from being rendered.                                            */
+#footer
+	{
+	height: 1%;
+	margin: 0;
+	padding: 20px 10px;
+	clear: both;
+	border-bottom: #000000 1px solid;
+	border-top: #000000 1px solid;
+	background-color: #d2cbbd;
+	}
+
+<?php include( "../nbi_css_includes/nbi_design_styles.css" ); ?>
+
+<?php include( "../nbi_css_includes/nbi_design_2col_sideBar_styles.css" ); ?>
+
+</style>
+
+</head>
+<body>
+
+	<div id="mainContainer">
+
+        <div id="header">
+			<h1>Practical CSS Layouts that work.</h1>
+			<h2>2 Column: Fixed Left Side Bar with Liquid Content Area without Footer</h2>
+			<h4>By: <a href="http://www.ryanchapin.com" target="_blank">Ryan Chapin</a></h4>
+		</div>
+		<!-- header, END -->
+
+		<div id="sideBarContentWrapper">
+		
+			<div id="contentContainer">
+						
+				<div id="content">
+							
+<?php include( "../nbi_css_includes/css_layouts_preamble.html" ); ?>
+
+					<hr />
+
+					<h3>2 Column: Fixed Left Side Bar with Liquid Content Area without Footer</h3>
+
+					<p>See the CSS markup for more details on this layout.</p>
+
+					<hr />
+
+<?php include( "../nbi_css_includes/css_layouts_overview.html" ); ?>
+
+					<hr />
+
+<?php include( "../nbi_css_includes/css_layouts_license.html" ); ?>
+
+					<hr />
+
+<?php include( "../nbi_css_includes/css_layouts_w3c_buttons.html" ); ?>
+
+
+				</div>
+				<!-- content, END -->			
+		
+			</div>
+			<!-- contentContainer, END -->
+		
+			<div id="sideBar">	
+				
+<?php include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" ); ?>
+
+			</div>
+			<!-- sideBar, END -->
+				
+			<div style="clear:both;"></div>
+		
+		</div>
+		<!-- sideBarContentWrapper, END -->		
+	
+	</div>
+	<!-- mainContainer, END -->
+	
+</body>
+</html>

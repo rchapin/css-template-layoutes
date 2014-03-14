@@ -1,0 +1,52 @@
+<html lang="en">
+	<head>
+	<meta charset="utf-8">
+
+	<title>Practical CSS Templates by Ryan Chapin</title>
+	<meta name="description" content="The HTML5 Herald">
+	<meta name="author" content="SitePoint">
+	<link rel="stylesheet" href="css/styles.css?v=1.0">
+
+<?php
+	require_once("libs/Parsedown.php");
+
+	$parsedown = new Parsedown();
+
+?>
+	</head>
+
+	<body>
+	<h1>Practial CSS Templates That Work</h1>
+
+<?php
+	$readme = file_get_contents("README.md");
+	echo $parsedown->parse($readme);
+?>
+
+	<ul>
+		<li><a href="2column_fixed_sidebar_left" target="_blank"/>2column_fixed_sidebar_left</a></li>
+		<li><a href="2column_fixed_sidebar_left_accessib" target="_blank"/>2column_fixed_sidebar_left_accessib</a></li>
+		<li><a href="2column_fixed_sidebar_left_no_footer" target="_blank"/>2column_fixed_sidebar_left_no_footer</a></li>
+		<li><a href="2column_fixed_sidebar_right" target="_blank"/>2column_fixed_sidebar_right</a></li>
+		<li><a href="2column_fixed_sidebar_right_no_footer" target="_blank"/>2column_fixed_sidebar_right_no_footer</a></li>
+		<li><a href="2column_fullscreen_liquid_sidebar_left" target="_blank"/>2column_fullscreen_liquid_sidebar_left</a></li>
+		<li><a href="2column_fullscreen_liquid_sidebar_right" target="_blank"/>2column_fullscreen_liquid_sidebar_right</a></li>
+		<li><a href="2column_liquid_sidebar_left" target="_blank"/>2column_liquid_sidebar_left</a></li>
+		<li><a href="2column_liquid_sidebar_left_no_footer" target="_blank"/>2column_liquid_sidebar_left_no_footer</a></li>
+		<li><a href="2column_liquid_sidebar_right" target="_blank"/>2column_liquid_sidebar_right</a></li>
+		<li><a href="2column_liquid_sidebar_right_no_footer" target="_blank"/>2column_liquid_sidebar_right_no_footer</a></li>
+		<li><a href="3col_full" target="_blank"/>3col_full</a></li>
+		<li><a href="3column_fixed" target="_blank"/>3column_fixed</a></li>
+		<li><a href="3column_footer" target="_blank"/>3column_footer</a></li>
+		<li><a href="3column_fullscreen" target="_blank"/>3column_fullscreen</a></li>
+		<li><a href="3column_fullscreen_header" target="_blank"/>3column_fullscreen_header</a></li>
+		<li><a href="3column_no_footer" target="_blank"/>3column_no_footer</a></li>
+		<li><a href="3column_no_header_footer" target="_blank"/>3column_no_header_footer</a></li>
+		<li><a href="3column_no_header_no_footer" target="_blank"/>3column_no_header_no_footer</a></li>
+	</ul>
+
+	<?php include("nbi_css_includes/css_layouts_license.html"); ?>
+
+	</body>
+
+</html>

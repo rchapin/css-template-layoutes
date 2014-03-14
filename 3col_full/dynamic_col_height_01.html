@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+
+<style type="text/css">
+
+body
+	{
+	background-image:url(sidebar.left.bg.gif);
+	background-position: top left;
+	background-repeat: repeat-y;
+	margin: 0;
+	padding: 0;
+	
+	/* IE 6.0 Addition */
+	height: 100%;
+	}
+
+/* IE requires the position to be absolute otherwise the div will render below */
+/* the mainContainer div on the page and not under it in the z axis            */
+#bg
+	{
+	position: absolute;
+	background-image: url(sidebar.right.bg.gif);
+	background-position: top right;
+	background-repeat: repeat-y;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	min-width: 960px;
+	/* IE 6.0 requires the -1 z-index so that the bg will render behind the scroll bar */
+	z-index: -1;
+	}
+
+body > #bg
+	{
+	position: relative;
+	z-index: 1;
+	}
+
+#mainContainer
+	{
+	position: relative;
+	min-width: 960px;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	}
+	
+#centerRightColumnContainer
+	{
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+	}
+	
+#centerRightColumnPositioner
+	{
+	margin-left: 190px; /* To fit the left side bar */
+	padding: 0;	
+	}
+
+#sideBarLeft
+	{
+	float: left;
+	width: 190px; /* Total width: 190px - padding *2 = 170px; */
+	margin-left: -100%;
+	padding: 0;
+	}
+
+#centerColumnContainer
+	{
+	float: left;
+	width: 100%;
+	}
+
+#centerColumn
+	{
+	margin-right: 260px;
+	padding: 10px;
+	}
+	
+#sideBarRight
+	{
+	float: left;
+	width: 240px; /* Total width: 260 - padding * 2 */
+	margin-left: -260px;
+	padding: 10px;
+	}
+
+
+<?php include( "../nbi_css_includes/nbi_design_styles.css" ); ?>
+
+
+/* IE 6.0: For some reason, if you just specify padding here it'll add 10 px  */
+/* to the entire layout and cause the page to scroll horizontally. So we have */
+/* to specify the width and then set a margin on it.  The width is equal to   */
+/* the width of the column, 190px - the 10px margin * 2                       */
+#sideBarLeft p
+	{
+	margin: 10px auto;
+	width: 170px;
+	}
+
+/* We need to shave off a pixel from the width of the ul.  This then renders */
+/* list inside this columns bg image.                                        */
+#sideBarLeft ul
+	{
+	margin: 0;
+	padding: 0;
+	border-bottom: #978e7c 1px solid;
+	width: 189px;
+	}
+
+/* IE fix for additional padding that otherwise get's rendered between list items */
+#sideBarLeft ul li
+	{
+	height: 1%;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	}
+
+#rightColumnBg > #sideBarLeft
+	{
+	height: auto;
+	}
+	
+#sideBarLeft ul li a, #sideBarLeft ul li a:visited
+	{
+	display: block;
+	border-top: #978e7c 1px solid;
+	padding: 5px 10px;
+	background-image: url(sidenav.bg.gif);
+	background-position: bottom;
+	background-repeat:repeat-x;
+	background-color: #fffbf7;
+	color: #59503e;
+	text-decoration: none;
+	font-weight: bold;
+	}
+	
+#sideBarLeft ul li a:hover
+	{
+	color: #000000;
+	text-decoration: underline;
+	}
+
+
+h1, h2, h4
+        {
+        text-align: center;
+        color: #000000;
+        }
+
+h4 a, h4 a:visited
+        {
+        color: #01007F;
+        }
+
+h4 a:hover
+        {
+        color: #4646F1;
+	text-decoration: underline;
+        /* text-decoration: none; */
+        }
+
+</style>
+
+<!--[if IE 7]>
+<style type="text/css">
+/* If we are using IE 7 we must override our position attribute for our #bg div */
+body > #bg
+	{
+	position: absolute;
+	}
+</style>
+<![endif]-->
+
+<script = "text/javascript">
+
+function resize_bg_div(){
+	// This function will determine which of the three columns or the window.height
+	// is the largest and then set the bg div to be that height.
+
+	var sideBarLeftId = document.getElementById('sideBarLeft');
+	var centerColumnId = document.getElementById('centerColumn');
+	var sideBarRightId = document.getElementById('sideBarRight');
+
+	var sideBarLeftHeight = sideBarLeftId.offsetHeight;
+	var centerColumnHeight = centerColumnId.offsetHeight;
+	var sideBarRightHeight = sideBarRightId.offsetHeight;
+	var innerHeight = window.innerHeight;
+
+	// alert( sideBarLeftHeight + " " + centerColumnHeight + " " + sideBarRightHeight + " " + innerHeight );
+
+	// Now we'll determine which is the largest value of the four aforementioned
+	// heights.  We'll then set our bg div to that height.
+	
+	var var_firstComparison = 0;
+	if( sideBarLeftHeight > centerColumnHeight ){
+		var_firstComparison = sideBarLeftHeight;
+	}
+	else{
+		var_firstComparison = centerColumnHeight;
+	}
+	// alert( "var_firstComparison = " + var_firstComparison );
+
+	var var_secondComparison = 0;
+	if( sideBarRightHeight > var_firstComparison ){
+		var_secondComparison = sideBarRightHeight;
+	}
+	else{
+		var_secondComparison = var_firstComparison;
+	}
+	// alert( "var_secondComparison = " + var_secondComparison );
+
+	var var_thirdComparison = 0;
+	if( var_secondComparison > innerHeight ){
+		var_thirdComparison = var_secondComparison;
+	}
+	else{
+		var_thirdComparison = innerHeight;
+	}
+	// alert( "var_thirdComparison = " + var_thirdComparison );
+	
+
+	// Now we'll set our bg div to the height of our largest div or window
+	var bgId= document.getElementById('bg');
+	bgId.style.height = var_thirdComparison+ "px";
+
+}
+
+window.onload = resize_bg_div;
+window.onresize = resize_bg_div;
+
+</script>
+
+
+<!--[if (IE 6)|(IE 7)]>
+<script = "text/javascript">
+
+function move_bg_div() {
+
+        var element = document.getElementById('bg');
+        element.style.top = document.documentElement.scrollTop;
+}
+
+window.onscroll = move_bg_div;
+window.onload = null;
+window.onresize = null;
+
+</script>
+
+<![endif]-->
+
+</head>
+
+<body>
+
+	<div id="mainContainer">
+	
+				<!-- The conainter divs for the center and the right columns -->		
+				<div id="centerRightColumnContainer">
+								
+					<div id="centerRightColumnPositioner">
+					
+						<div id="centerColumnContainer">
+						
+							<div id="centerColumn">
+
+								<h1>Practical CSS Layouts that work.</h1>
+								<!-- <h2>3 Column: Fixed Side-Bars, Liquid Content Area that fills the page</h2> -->
+								<h4>By: <a href="http://www.ryanchapin.com" target="_blank">Ryan Chapin</a></h4>
+
+							
+<?php include( "../nbi_css_includes/css_layouts_preamble.html" ); ?>
+
+								<hr />
+
+								<h3>Shortcomings:</h3>
+
+								<p>
+									The only shortcoming with this layout is the min-width support for IE 6.0.  I had worked on a number of different solutions that involved resizing the divs to keep them from collapsing on resize, but IE 6.0 just ended up crashing even when the javascript was dirt-simple and I was certain that there was nothing inherent with the code itself that should cause a crash.  So, when you collapse the browser to a certain point in IE 6.0, things start to look a bit funky.
+								</p>
+
+								<hr />                                
+
+<?php include( "../nbi_css_includes/css_layouts_license.html" ); ?>
+
+								<hr />
+
+<?php include( "../nbi_css_includes/css_layouts_w3c_buttons.html" ); ?>
+
+
+							</div>
+							<!-- centerColumn, END -->
+						
+						</div>
+						<!-- centerColumnContainer, END -->
+						
+						
+						<div id="sideBarRight">
+
+<?php include( "../nbi_css_includes/css_layouts_overview.html" ); ?>
+
+						</div>
+						<!-- sideBarRight, END -->
+
+					</div>
+					<!-- centerRightColumnPositioner, END -->		
+						
+				</div>
+				<!-- centerRightColumnContainer, END -->
+			
+
+				<!-- The left column div -->			
+				<div id="sideBarLeft">
+
+<?php include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" ); ?>
+
+					<!-- Required so that IE 6.0 doesn't mangle the last entry of content in this column -->
+					<p>&nbsp;</p>
+					
+				</div>
+				<!-- sideBarLeft, END -->
+					
+	</div>
+	<!-- mainContainer, END -->
+
+<div id="bg"></div>
+   
+</body>
+</html>

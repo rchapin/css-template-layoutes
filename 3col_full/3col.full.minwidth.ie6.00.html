@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+
+<style type="text/css">
+
+
+body
+	{
+	background-image:url(sidebar.left.bg.gif);
+	background-position: top left;
+	background-repeat: repeat-y;
+	margin: 0;
+	padding: 0;
+	
+	/* IE 6.0 Addition */
+	height: 100%;
+	/* overflow-y: auto; */
+	}
+
+/* IE requires the position to be absolute otherwise the div will render below */
+/* the mainContainer div */
+#bg
+	{
+	position: absolute;
+	background-image: url(sidebar.right.bg_long.gif);
+	background-position: top right;
+	/* background-attachment: fixed; */
+	background-repeat: repeat-y;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	
+	/* min-width: 960px; */
+	/* Unfortunately, you can only have one instance of this on the page, or you end up in an endless loop */
+	width:expression( document.body.clientWidth < 960 ? "960px" : "100%" );
+	
+	
+	/* border: #000000 1px solid; */
+	/* overflow: auto; */
+	/* IE 6.0 requires the -1 z-index so that the bg will render behind the scroll bar */
+	z-index: -1;
+	}
+
+body > #bg
+	{
+	z-index: 1;
+	}
+
+#ieContainer
+	{
+	width: 100%;
+	}
+	
+#mainContainer
+	{
+	position: relative;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	}
+	
+#centerRightColumnContainer
+	{
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+	}
+	
+#centerRightColumnPositioner
+	{
+	margin-left: 190px; /* To fit the left side bar */
+	padding: 0;	
+	}
+
+#sideBarLeft
+	{
+	float: left;
+	width: 190px; /* Total width: 190px - padding *2 = 170px; */
+	margin-left: -100%;
+	padding: 0;
+	}
+
+#centerColumnContainer
+	{
+	float: left;
+	width: 100%;
+	}
+
+#centerColumn
+	{
+	margin-right: 260px;
+	padding: 10px;
+	}
+	
+#sideBarRight
+	{
+	float: left;
+	width: 240px; /* Total width: 260 - padding * 2 */
+	margin-left: -260px;
+	padding: 10px;
+	}
+</style>
+
+
+<script type="text/javascript">
+function move_box() {
+	var element = document.getElementById('bg');
+	element.style.top = document.documentElement.scrollTop;
+} // move_box, END
+
+function minWidthFix() {
+	
+	var centerColumnID = document.getElementById('centerColumn');
+	var sideBarLeftID = document.getElementById('sideBarLeft');
+	var mainContainerID = document.getElementById('mainContainer');
+	var bgID = document.getElementById('bg');
+	
+	if( document.documentElement.clientWidth < 960 ){
+
+		// Perhaps we just set the width of our bg and maincontainer divs?
+		bgID.style.width = "960px";
+		mainContainerID.style.width = "960px";
+		
+		sideBarLeftID.style.left = "0px";
+		sideBarLeftID.style.width = "190px";
+
+
+	} // if( document.documentElement.clientWidth < 960 ){, END
+	
+	else{
+		bgID.style.width = "";
+		mainContainerID.style.width = "";
+		
+		sideBarLeftID.style.left = "0";
+		sideBarLeftID.style.width = "190px";	
+		
+	} // else, END
+
+} // function minWidthFix, END
+
+
+window.onscroll = move_box;
+window.onresize = function(){
+	minWidthFix();
+	
+	var sideBarLeftID = document.getElementById('sideBarLeft');
+	alert( "sideBarLeftID.style.left = " + sideBarLeftID.style.left );
+
+	}
+
+
+</script>
+
+
+</head>
+
+<body>
+
+	<div id="mainContainer">
+	
+				<!-- The conainter divs for the center and the right columns -->		
+				<div id="centerRightColumnContainer">
+								
+					<div id="centerRightColumnPositioner">
+					
+						<div id="centerColumnContainer">
+						
+							<div id="centerColumn">
+							
+								<!-- IE 6.0 Kludge -->
+								
+								<h1>Practical CSS Layouts that work.</h1>
+                        		<h2>3 Column: Fixed Side-Bars, Liquid Content Area, with Footer, no Header</h2>
+                        		<h4>By: <a href="http://www.ryanchapin.com" target="_blank">Ryan Chapin</a></h4>
+								
+								<img src="rchapin_racing.jpg" style="float:left;" width="150" height="102" border="0" alt="" />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+							</div>
+							<!-- centerColumn, END -->
+						
+						</div>
+						<!-- centerColumnContainer, END -->
+						
+						
+						<div id="sideBarRight">
+							Right<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+						</div>
+						<!-- sideBarRight, END -->
+
+					</div>
+					<!-- centerRightColumnPositioner, END -->		
+						
+				</div>
+				<!-- centerRightColumnContainer, END -->
+			
+
+				<!-- The left column div -->			
+				<div id="sideBarLeft">
+
+					Left
+					<br /><br />
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<br />
+							<br />
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					
+					<!-- Required so that IE 6.0 doesn't mangle the last entry of content in this column -->
+					<p>&nbsp;</p>
+					
+				</div>
+				<!-- sideBarLeft, END -->
+					
+				<div class="clear_both"></div>
+
+	</div>
+	<!-- mainContainer, END -->
+
+<div id="bg">&nbsp;</div>
+   
+</body>
+</html>

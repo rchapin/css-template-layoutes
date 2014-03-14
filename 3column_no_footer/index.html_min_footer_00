@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>3 Column CSS Layout That Works</title>
+
+<meta name="keywords" content="CSS, layout, design, 3 column, float, floats, clear, clears" />
+<meta name="description" content="A practical 3 column CSS layout with a minimal footer that works with dynamic content and is easy to understand and customize." />
+
+<style type="text/css">
+
+/* ---------------------------------------------------------------------------- */
+/* You are free to modify and use this CSS layout in accordance with the        */
+/* Creative Commons 3.0 licence (see links to details of the license below) as  */
+/* long as you include this comment, the link to the license, and it's          */
+/* attribution.                                                                 */
+/*                                                                              */
+/* This CSS layout is licensed under the Creative Commons 3.0 licence.          */
+/* Abstract: http://creativecommons.org/licenses/by/3.0/us/                     */
+/* Full License: http://creativecommons.org/licenses/by/3.0/us/legalcode        */
+/*                                                                              */
+/* 3 Column CSS Layout: 2 fixed side bars with a liquid center column.          */
+/* By: Ryan Chapin, http://www.ryanchapin.com                                   */
+/* Version: 1.0                                                                 */
+/* Date: 2008-03-24                                                             */      
+/*                                                                              */
+/* If you'd like to contact Ryan with questions or comments, please go to:      */
+/* http://nbinteractive.com/contactryan.html                                    */
+/* ---------------------------------------------------------------------------- */
+
+body
+	{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 17px;
+	margin: 0;
+	padding: 0;
+	}
+
+h1, h2, h4
+	{
+	text-align: center;
+	color: #ffffff;
+	}
+	
+h4 a, h4 a:visited
+	{
+	color: #d9dcec;
+	}
+		
+h4 a:hover
+	{
+	color: #ffffff;
+	text-decoration: none;
+	}
+	
+h2
+	{
+	font-size: 18px;
+	}
+	
+p
+	{
+	margin-top: 0px;
+	margin-bottom: 20px;
+	}
+	
+.clear_both
+	{
+	clear: both;
+	}
+
+/* ============================================================================ */
+/* Layout Styles */
+#mainContainer
+	{
+	min-width: 960px;
+	padding: 0;
+	margin: 0;
+	}
+
+#header
+	{
+	background-color: #0000ac;
+	background-image: url(header.bg.jpg);
+	background-position: top;
+	background-repeat: repeat-x;
+	margin: 0;
+	padding: 10px;
+	}
+	
+/* ---------------------------------------------------------------------------- */
+/* The top level wrapper for the content area.  It contains all of the other    */
+/* column related divs.  This div's primary purpose is to render the background */
+/* for the left column and the center column's background color.                */
+/* It requires the following:                                                   */
+/*  . A background image that is the width of the left column (see sideBarLeft  */
+/*    width and other style settings).                                          */
+/*                                                                              */
+/* IE 6.0 Fix:  The height: 1%; fixes some spurious white space that is         */
+/* otherwise rendered between this and the footer div                           */
+#leftColumnBg
+	{
+	margin: 0;
+	padding: 0;
+	background: #edeff8 url(sidebar.left.bg.gif) top left repeat-y;
+	height: 1%;
+	}
+
+/* Style settings for all other browsers for #leftColumnBg. */
+#mainContainer > #leftColumnBg
+	{
+	height: auto;
+	}	
+		
+/* ---------------------------------------------------------------------------- */
+/* The secondary wrapper for the content/columns area.  Its primary purpose is  */
+/* to render to background for the right column.                                */
+/* It requires the following:                                                   */
+/*  . A background image that is the width of the right colunm (see             */
+/*    sideBarRight style settings).                                             */
+/*  . A border.  Minimally, border-top, as illustrated in the example below.    */
+/*    Otherwise, it will not render the background images/colors properly       */
+/*    It doesn't matter what color it is set to, but it must be set to some     */
+/*    color and thickness to work properly.                                     */
+#rightColumnBg
+	{
+	margin: 0;
+	padding: 0;
+	background: url(sidebar.right.bg.gif) top right repeat-y;
+	border-top: #000000 1px solid;
+
+	/* It looks like adding a 1px border around this entire div will make   */
+        /* IE 6.0 render the background image properly.  The problem then       */
+        /* becomes incorporating that border into the design                    */
+	/* border: #000000 1px solid; */
+	}
+	
+#centerRightColumnContainer
+	{
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+	}
+	
+#centerRightColumnPositioner
+	{
+	margin-left: 190px; /* To fit the left side bar */
+	padding: 0;	
+	}
+
+#sideBarLeft
+	{
+	float: left;
+	width: 190px; /* Total width: 190px - padding *2 = 170px; */
+	margin-left: -100%;
+	padding: 0;
+	}
+	
+/* IE 6.0: For some reason, if you just specify padding here it'll add 10 px */
+/* to the entire layout and cause the page to scroll horizontally            */
+#sideBarLeft p
+	{
+	margin: 10px auto;
+	width: 170px;
+	}
+	
+#rightColumnBg > #sideBarLeft p
+	{
+	padding: 10px;
+	margin: 0;
+	}
+
+#centerColumnContainer
+	{
+	float: left;
+	width: 100%;
+	/* padding: 10px; */
+	}
+
+#centerColumn
+	{
+	margin-right: 260px;
+	padding: 10px;
+	}
+	
+#sideBarRight
+	{
+	float: left;
+	width: 240px; /* Total width: 300px - padding *2 = 280px; */
+	margin-left: -260px;
+	padding: 10px;
+	}
+
+/* ---------------------------------------------------------------------------- */
+/* You must include both some sort of height, and a border-top entry on this    */
+/* div otherwise IE 6 and 7 will not render the columns properly                */
+#footer
+	{
+	height: 20px;
+	clear: both;
+	border-top: #000000 1px solid;
+	background-color: #ffffff;
+	}
+	
+/* ---------------------------------------------------------------------------- */
+/* NBI Layout/Design styles                                                     */
+
+.code
+	{
+	font-family:"Courier New", Courier, monospace;
+	}
+
+#sideBarLeft ul
+	{
+	margin: 0;
+	padding: 0;
+	border-bottom: #978e7c 1px solid;
+	width: 189px;
+	}
+
+/* IE fix for additional padding that otherwise get's rendered between list items */
+#sideBarLeft ul li
+	{
+	height: 1%;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	}
+
+#rightColumnBg > #sideBarLeft
+	{
+	height: auto;
+	}
+	
+#sideBarLeft ul li a, #sideBarLeft ul li a:visited
+	{
+	display: block;
+	border-top: #978e7c 1px solid;
+	padding: 5px 10px;
+	background-image: url(sidenav.bg.gif);
+	background-position: bottom;
+	background-repeat:repeat-x;
+	background-color: #fffbf7;
+	color: #59503e;
+	text-decoration: none;
+	font-weight: bold;
+	}
+	
+#sideBarLeft ul li a:hover
+	{
+	color: #000000;
+	text-decoration: underline;
+	}
+	
+#w3cButtons
+	{
+	width: 196px;
+	margin: 20px auto;
+	padding: 0;
+	}
+	
+#markupBtn
+	{
+	margin: 0 10px 0 0;
+	padding: 0;
+	width: 88px;
+	float: left;
+	}
+	
+#cssBtn
+	{
+	margin: 0 0 0 10px;
+	padding: 0;
+	width: 88px;
+	float: left;
+	}
+	
+</style>
+
+</head>
+<body>
+
+	
+	<div id="mainContainer">
+	
+        <div id="header">
+			<h1>Practical CSS Layouts that work.</h1>
+			<h2>3 Column: Fixed Side-Bars, Liquid Content Area, Minimal Footer</h2>
+			<h4>By: <a href="http://www.ryanchapin.com" target="_blank">Ryan Chapin</a></h4>
+		</div>
+		<!-- header, END -->
+
+		<!-- The container divs that handle rendering the backgrounds for the columns -->
+		<div id="leftColumnBg">
+			<div id="rightColumnBg">
+		
+		
+				<!-- The conainter divs for the center and the right columns -->		
+				<div id="centerRightColumnContainer">							
+					<div id="centerRightColumnPositioner">
+					
+						<div id="centerColumnContainer">
+						
+							<div id="centerColumn">
+							
+
+<? include( "../nbi_css_includes/css_layouts_preamble.html" ); ?>
+
+								<hr />
+								
+								<h3>3 Column: Fixed Side-Bars, Liquid Content Area, Minimal Footer</h3>
+								<p>The &quot;Minimal Footer&quot; distinction is a necessary evil for making this layout compatible with both IE 6 and 7 browsers.  Without some sort of height and border-color (minimum) in the footer the columns don't render properly under IE.</p>
+								
+								<hr />
+								
+								<h3>Shortcomings:</h3>
+								<p>The biggest problem with this layout is that the right-hand column background image doesn't always render to the bottom of it's containing div under IE 6.0 only.  I decided that this was acceptable because IE 6.0 usage is continuing to drop and I am building a forward looking set of templates that properly validate and are comprehensible.</p>
+								
+								<p>This layout also requires an additional <span class="code">&lt;p&gt;</span> tag with an <span class="code">&amp;nbsp;</span> in it.  For whatever reason, IE 6.0 take the last line of content in that column's div and mangles it, rendering it towards the bottom of that column</p> 
+								
+								<p>See the CSS markup for more details on this layout.</p>
+								
+								<hr />							
+
+<? include( "../nbi_css_includes/css_layouts_license.html" ); ?>
+								
+								<hr />
+
+<? include( "../nbi_css_includes/css_layouts_w3c_buttons.html" ); ?>
+								
+							</div>
+							<!-- centerColumn, END -->
+						
+						</div>
+						<!-- centerColumnContainer, END -->
+						
+						
+						<div id="sideBarRight">
+
+<? include( "../nbi_css_includes/css_layouts_overview.html" ); ?>
+
+						</div>
+						<!-- sideBarRight, END -->
+
+					</div>
+					<!-- centerRightColumnPositioner, END -->			
+				</div>
+				<!-- centerRightColumnContainer, END -->
+			
+
+				<!-- The left column div -->			
+				<div id="sideBarLeft">
+
+<? include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" ); ?>
+
+					<!-- Required so that IE 6.0 doesn't mangle the last entry of content in this column -->
+					<p>&nbsp;</p>
+					
+				</div>
+				<!-- sideBarLeft, END -->
+					
+				<div class="clear_both"></div>
+
+			</div>
+		</div>
+		<!-- rightColumnBg, and leftColumnBg (respectively), END -->	
+		<!--
+		For some reason, if I explicitly place a comments after the </div> for the
+		rightColumnBg, the page doesn't render in IE 7.0.
+		-->
+
+		<div id="footer"></div>
+		
+	</div>
+	<!-- mainContainer, END -->
+	
+</body>
+</html>

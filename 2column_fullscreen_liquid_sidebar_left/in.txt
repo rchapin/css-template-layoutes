@@ -1,0 +1,39 @@
+
+						<h3>2 Column Tableless layout: 2 Columns with a Fixed Right Side-Bar and a Liquid Content Area that Renders Full-Screen</h3>
+
+						<p>
+							This table-less layout features 2 columns: 2 fixed side bars on the left and right and a liquid center column.  The <strong>trick part about this layout</strong> is that <strong>all three of the columns span the entire height of the window</strong> regardless of the height of the content in the columns and regardless of the size of the browser window.  Here are some examples:
+						</p>
+							<ul>
+								<li><a href="sample_main.html" target="_blank">With just the Main Content Column</a></li>
+								<li><a href="sample_right.html" target="_blank">With just the Right Column</a></li>
+								<li><a href="sample_none.html" target="_blank">With no content</a></li>
+							</ul>  
+
+							<hr />
+
+							<h3>Shortcomings:</h3>
+
+							<p>
+								The min-width support for IE 6.0.  I had worked on a number of different solutions that involved resizing the divs to keep them from collapsing on resize, but IE 6.0 just ended up crashing even when the javascript was dirt-simple and I was certain that there was nothing inherent with the code itself that should cause a crash.  So, when you collapse the browser to a certain point in IE 6.0, things start to look a bit funky.
+							</p>
+
+							<p>
+								In IE 6.0, you <em>MUST</em> have at the very minium an empty <span class="code">&lt;p&gt;</span> tag in the centerColumn id or IE 6.0 will not render the background image. 
+							</p>
+
+							<p>
+								In Firefox when the window is collapsed below the min-width setting and the window itself is longer than the amount of content on the page you will get some spurious vertical scrolling that is equal to the height of the horizontal scroll bar.  This is because of the way that Firefox renders their scroll bars and how that affects the calculation of the total window height in javascript.  It has a very minimal impact on the layout/designs.
+							</p>
+
+							<p>
+								In Firefox, because of the way that the height of divs is calculated in javascript do not include any div elements at the top or bottom of the columns that include top or bottom margins.  If so, the height of the three columns will not be calculated properly and the right column's background will not render all of the way to the bottom of the screen.  This can be easily solved by using padding, or by wrapping the div with another div with padding.
+							</p>
+
+							<hr />                                
+
+<?php include( "../nbi_css_includes/css_layouts_license.html" ); ?>
+
+							<hr />
+
+<?php include( "../nbi_css_includes/css_layouts_w3c_buttons.html" ); ?>

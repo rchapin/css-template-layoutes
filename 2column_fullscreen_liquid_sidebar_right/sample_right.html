@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>CSS 2 Column Full Screen Layout</title>
+
+<meta name="keywords" content="CSS, layout, design, 2 column, float, floats, clear, clears, liquid, full-screen" />
+<meta name="description" content="A practical table-less 2 column liquid CSS layout with full-screen columns that is easy to understand and customize." />
+
+
+<style type="text/css">
+
+<?php include( "../nbi_css_includes/css_comment_attribute_top.html" ); ?>
+ * Version: 1.0
+ * Date: 2009-02-26
+<?php include( "../nbi_css_includes/css_comment_attribute_bottom.html" ); ?>
+
+/*
+ * ----------------------------------------------------------------------------
+ * Layout Styles
+ */
+
+body
+	{
+	/*
+	 * add a background image here if you want to layer one under the background
+	 * image below
+	 */
+	margin: 0;
+	padding: 0;
+	
+	/*
+	 * IE 6.0 Addition
+	 */
+	height: 100%;
+	}
+
+/*
+ * IE requires the position to be absolute otherwise the div will render below
+ * the mainContainer div on the page and not under it in the z axis
+ */
+#bg
+	{
+	position: absolute;
+	background-image: url(columns.bg.gif);
+	background-position: top right;
+	background-repeat: repeat-y;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	min-width: 960px;
+	/*
+	 * IE 6.0 requires the -1 z-index so that the bg will render behind the scroll bar
+	 */
+	z-index: -1;
+	}
+
+body > #bg
+	{
+	position: relative;
+	z-index: 1;
+	}
+
+#mainContainer
+	{
+	position: relative;
+	min-width: 960px;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	}
+
+#header
+        {
+        background-color: #0000ac;
+        background-image: url(header.bg.jpg);
+        background-position: top;
+        background-repeat: repeat-x;
+        margin: 0;
+        padding: 10px;
+        }
+
+#centerRightColumnContainer
+	{
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+	}
+	
+#centerRightColumnPositioner
+	{
+	margin: 0;
+	padding: 0;	
+	}
+
+#centerColumnContainer
+	{
+	float: left;
+	width: 100%;
+	}
+
+#centerColumn
+	{
+	margin-right: 190px;
+	padding: 10px;
+	}
+	
+#sideBar
+	{
+	float: left;
+	width: 190px;
+	margin-left: -190px;
+	}
+
+#sideBar p
+	{
+	padding: 10px;
+	}
+
+<?php include( "../nbi_css_includes/nbi_design_styles.css" ); ?>
+
+<?php include( "../nbi_css_includes/nbi_design_2col_sideBar_styles.css" ); ?>
+
+/*
+ * Overrides the default sideBar ul entry enabling us to position it properly in the right side bar.
+ */
+
+/*
+ * IE 6 style
+ */
+#sideBar ul
+        {
+        border-left: #978e7c 1px solid;
+        }
+
+#mainContainer > #sideBar ul
+        {
+        left: 1px;
+        position: relative;
+        border-left: none;
+        }
+
+</style>
+
+<!--[if IE 7]>
+<style type="text/css">
+/*
+ * If we are using IE 7 we must override our position attribute for our #bg div
+ */
+body > #bg
+	{
+	position: absolute;
+	}
+</style>
+<![endif]-->
+
+<script language="javascript" type="text/javascript">
+
+function resize_bg_div(){
+	// This function will determine which of the three columns or the window.height
+        // is the largest and then set the bg div to be that height.
+
+        // This assumes that any div markup that is above our columns is wrapped
+        // in a single div with the id=header
+        var var_bg_offset = document.getElementById('header').offsetHeight;
+
+        // First we create an array and add to it the heights of each of the three columns
+        // and the window height
+        array_colHeights = new Array( );
+        array_colHeights.push( document.getElementById("sideBar").offsetHeight );
+        array_colHeights.push( document.getElementById("centerColumn").offsetHeight );
+
+        // Instead of the raw window.innerHeight we need to take into account the offset size
+        // of our header divs
+        array_colHeights.push( window.innerHeight - var_bg_offset );
+
+        // Sorting our array in descending order
+        array_colHeights.sort( function( a, b ){ return b - a; } );
+
+        // Now we'll set our bg div to the height of our largest div or window height
+        document.getElementById('bg').style.height = array_colHeights[0] + "px";
+        delete array_colHeights;
+        delete var_bg_offset;
+}
+
+window.onload = resize_bg_div;
+window.onresize = resize_bg_div;
+
+</script>
+
+
+<!--[if (IE 6)|(IE 7)]>
+<script language="javascript" type="text/javascript">
+
+function move_bg_div() {
+
+        var element = document.getElementById('bg');
+        element.style.top = document.documentElement.scrollTop;
+}
+
+window.onscroll = move_bg_div;
+window.onload = move_bg_div;
+window.onresize = null;
+
+</script>
+
+<![endif]-->
+
+</head>
+
+<body>
+
+	<div id="mainContainer">
+
+		<div id="header">
+<h1>Practical CSS Layouts that work.</h1>
+                        <h2>2 Column, Full Screen: Fixed Right Side-Bar and a Liquid Content Area</h2>
+                        <h4>By: <a href="http://www.ryanchapin.com" target="_blank">Ryan Chapin</a></h4>
+		</div>
+	
+		<!-- The conainter divs for the center and the right columns -->		
+		<div id="centerRightColumnContainer">
+								
+			<div id="centerRightColumnPositioner">
+			
+				<div id="centerColumnContainer">
+				
+					<div id="centerColumn">
+
+						<!--
+						Without this emtpy p tag IE 6 will not render the page correctly
+						when there is no content in either of the columns
+						-->
+			        	        <!--[if (IE 6)]>
+                				<p>&nbsp;</p>
+                				<![endif]-->
+
+					</div>
+					<!-- centerColumn, END -->
+						
+				</div>
+				<!-- centerColumnContainer, END -->
+						
+						
+				<div id="sideBar">
+
+<?php include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" ); ?>
+
+				</div>
+				<!-- sideBar, END -->
+
+			</div>
+			<!-- centerRightColumnPositioner, END -->		
+						
+		</div>
+		<!-- centerRightColumnContainer, END -->
+			
+		<!-- Without this emtpy div IE 6 will not render the page correctly -->
+		<!--[if (IE 6)]>
+		<div>&nbsp;</div>
+		<![endif]-->
+
+	</div>
+	<!-- mainContainer, END -->
+
+<div id="bg"></div>
+   
+</body>
+</html>

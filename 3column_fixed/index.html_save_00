@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>CSS 2 Column Fixed Width Layout That Works</title>
+
+<meta name="keywords" content="CSS, layout, design, 2 column, float, floats, clear, clears" />
+<meta name="description" content="A practical 2 column, fixed-width layout with a right-hand side bar and footer that works with dynamic content and is easy to understand and customize." />
+
+<style type="text/css">
+
+<? include( "../nbi_css_includes/css_comment_attribute.html" ); ?>
+
+/* ============================================================================ */
+/* Layout Styles */	
+#mainContainer
+	{
+	width: 960px; /* 750px */
+	min-width: 960px;
+	margin: 0 auto;
+	}
+	
+#header
+	{
+	border: #000000 1px solid;
+	background-color: #0000ac;
+	background-image: url(header.bg.jpg);
+	background-position: top;
+	background-repeat: repeat-x;
+	margin: 0;
+	padding: 10px;
+	}
+	
+#sideBarContentContainer
+	{
+	/* For a "two-stripe" look with columns of equal height, add your bg.gif here" */
+	background-image: url(columns.bg.gif); 
+	background-repeat: repeat-y;
+	background-position: right;
+	margin: 0 auto;;
+	padding: 0;
+	width: 958px; /* Original width of 960 (the total width of the page) - the width of the border (2px)*/
+	border-right: #000000 1px solid;
+	border-left: #000000 1px solid;
+	position: relative;
+	}
+
+#sideBar
+	{
+	width: 190px; /* Width of your nav column */
+	float: right;
+	margin: 0;
+	padding: 0;
+	}
+
+/* IE 6.0: For some reason, if you just specify padding here it'll add 10 px */
+/* to the entire layout and cause the page to scroll horizontally            */
+#sideBar p
+        {
+        margin: 10px auto;
+        width: 170px;
+        }
+
+#contentContainer
+	{
+	float: none;
+	width: auto;
+	}
+
+/*
+#subContentColumn
+	{
+	width: auto;
+	margin: 0;
+	padding: 0;
+	float: none;
+	}
+*/
+
+/* IE 6 hack for the subContentColumn div */
+#subContentColumn
+	{
+	background-color: #cccccc;
+	float: right;
+	width: 509px; /* Total width 569px */
+	/* margin: 15px 0 15px 30px; */
+	margin: 0;
+	padding: 0 30px 15px 30px;
+	}
+
+#subNavColumn
+	{
+	float: right;
+	width: 190px; /* Total width 195px */
+	/* margin: 15px 20px 15px 20px; */
+	margin: 0;
+	padding: 0;
+	}
+
+
+	
+#content
+	{
+	float: right;
+	width: 578px; /* Width of your content column (560px) - the 2 pixels border - the padding */
+	margin: 0;
+	padding: 0px;
+	}
+
+#footer
+	{
+	margin: 0;
+	padding: 20px 10px;
+	clear: both;
+	border: #000000 1px solid;
+	background-color: #d2cbbd;
+	}
+
+<? include( "../nbi_css_includes/nbi_design_styles.css" ); ?>
+
+<? include( "../nbi_css_includes/nbi_design_2col_sideBar_styles.css" ); ?>
+
+/* Overrides the default sideBar ul entry enabling us to position it */
+/* properly in the right side bar.                                   */
+#sideBar ul
+	{
+	margin: 0;
+	padding: 0;
+	border-bottom: #978e7c 1px solid;
+	width: 189px;
+	position: relative;
+	left: 1px;
+	}
+	
+</style>
+
+</head>
+<body>
+
+	<div id="mainContainer">
+	
+		<div id="header">
+			<h1>Practical CSS Layouts that work.</h1>
+			<h2>2 Column: Fixed Width with Right Side Bar, Content Area, and Footer</h2>
+			<h4>By: <a href="http://www.ryanchapin.com" target="_blank">Ryan Chapin</a></h4>
+		</div>
+		<!-- header, END -->
+				
+		<div id="sideBarContentContainer">
+		
+			<div id="sideBar">
+Righ
+<? // include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" ); ?>
+
+			</div>
+			<!-- sideBar, END -->
+			
+			<div id="contentContainer">
+
+				<div id="subContentColumn">
+					Content
+				</div>
+				<!-- subContentColumn, END -->
+					
+				<div id="subNavColumn">
+<? include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" ); ?>
+				</div>
+				<!-- subNavColumn, END -->
+				
+				<div class="clear_both"></div>
+
+			</div>
+			<!-- contentContainer, END -->
+		
+		<!--
+		Forces the size of the sideBarContentContainer to extend to the maximum size of either
+		the sideBar or the contentContainer such that the background gif renders properly
+		-->
+		<div style="clear:both"></div>
+		
+		</div>
+		<!-- sideBarContentContainer -->
+	
+		<div id="footer">
+
+<? include( "../nbi_css_includes/footer_text.html" ); ?>
+
+		</div>
+	
+	</div>
+	<!-- mainContainer -->
+
+</body>
+</html>

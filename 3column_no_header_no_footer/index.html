@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>CSS 3 Column CSS Layout That Works</title>
+
+<meta name="keywords" content="CSS, layout, design, 3 column, float, floats, clear, clears" />
+<meta name="description" content="A practical 3 column liquid CSS layout without a footer or header that works with dynamic content and is easy to understand and customize." />
+
+<style type="text/css">
+
+<?php include( "../nbi_css_includes/css_comment_attribute.html" ); ?>
+
+/* ============================================================================ */
+/* Layout Styles */
+#mainContainer
+	{
+	min-width: 960px;
+	padding: 0;
+	margin: 0;
+	}
+
+/* ---------------------------------------------------------------------------- */
+/* The top level wrapper for the content area.  It contains all of the other    */
+/* column related divs.  This div's primary purpose is to render the background */
+/* for the left column and the center column's background color.                */
+/* It requires the following:                                                   */
+/*  . A background image that is the width of the left column (see sideBarLeft  */
+/*    width and other style settings).                                          */
+/*                                                                              */
+/* IE 6.0 Fix:  The height: 1%; fixes some spurious white space that is         */
+/* otherwise rendered between this and the footer div                           */
+#leftColumnBg
+	{
+	margin: 0;
+	padding: 0;
+	background: #edeff8 url(sidebar.left.bg.gif) top left repeat-y;
+	height: 1%;
+	}
+
+/* Style settings for all other browsers for #leftColumnBg. */
+#mainContainer > #leftColumnBg
+	{
+	height: auto;
+	}	
+		
+/* ---------------------------------------------------------------------------- */
+/* The secondary wrapper for the content/columns area.  Its primary purpose is  */
+/* to render to background for the right column.                                */
+/* It requires the following:                                                   */
+/*  . A background image that is the width of the right colunm (see             */
+/*    sideBarRight style settings).                                             */
+/*  . A border on all the right, bottom, and left. Otherwise, it will           */
+/*    not render the background images/colors properly in IE 6 and 7.  Using    */
+/*    the color transparent does not work as IE 6.0 will simply render that as  */
+/*    black.  In this case, I simply set the border color for each edge to      */
+/*    match the background color of that edge of the page.  For the bottom      */
+/*    border, I used a color that works well delinating the footer from the     */
+/*    rest of the layout.                                                       */
+#rightColumnBg
+	{
+	margin: 0;
+	padding: 0;
+	background: url(sidebar.right.bg.gif) top right repeat-y;
+	border-bottom: #000000 1px solid;
+	border-left: #efeafd 1px solid;
+	border-right: #cfd5f5 1px solid;
+	}
+
+/* We can get away without a left and right border for IE 7 and all other       */
+/* compliant browsers so we will set the left and right border to none.         */
+#leftColumnBg > #rightColumnBg
+	{
+	border-left: none;
+	border-right: none;
+	}
+	
+#centerRightColumnContainer
+	{
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+	}
+	
+#centerRightColumnPositioner
+	{
+	margin-left: 190px; /* To fit the left side bar */
+	padding: 0;	
+	}
+
+#sideBarLeft
+	{
+	float: left;
+	width: 190px; /* Total width: 190px - padding *2 = 170px; */
+	margin-left: -100%;
+	padding: 0;
+	}
+	
+/* IE 6.0: For some reason, if you just specify padding here it'll add 10 px  */
+/* to the entire layout and cause the page to scroll horizontally. So we have */
+/* to specify the width and then set a margin on it.  The width is equal to   */
+/* the width of the column, 190px - the 10px margin * 2                       */
+#sideBarLeft p
+	{
+	margin: 10px auto;
+	width: 170px;
+	}
+	
+#rightColumnBg > #sideBarLeft p
+	{
+	padding: 10px;
+	margin: 0;
+	}
+
+#centerColumnContainer
+	{
+	float: left;
+	width: 100%;
+	}
+
+#centerColumn
+	{
+	margin-right: 260px;
+	padding: 10px;
+	}
+	
+#sideBarRight
+	{
+	float: left;
+	width: 240px; /* Total width: 260 - padding * 2 */
+	margin-left: -260px;
+	padding: 10px;
+	}
+
+<?php include( "../nbi_css_includes/nbi_design_styles.css" ); ?>
+
+<?php include( "../nbi_css_includes/nbi_design_3col_sideBarLeft_styles.css" ); ?>
+
+h1, h2, h4
+	{
+	color: #000000;
+	}
+
+h4 a, h4 a:visited
+        {
+        color: #000066;
+        }
+
+h4 a:hover
+        {
+        color: #000000;
+        text-decoration: none;
+        }
+
+	
+</style>
+
+</head>
+<body>
+
+	
+	<div id="mainContainer">
+	
+
+		<!-- The container divs that handle rendering the backgrounds for the columns -->
+		<div id="leftColumnBg">
+			<div id="rightColumnBg">
+		
+		
+				<!-- The conainter divs for the center and the right columns -->		
+				<div id="centerRightColumnContainer">							
+					<div id="centerRightColumnPositioner">
+					
+						<div id="centerColumnContainer">
+						
+							<div id="centerColumn">
+							
+								<h1>Practical CSS Layouts that work.</h1>
+                        <h2>3 Column: Fixed Side-Bars, Liquid Content Area, with Footer, no Header</h2>
+                        <h4>By: <a href="http://www.ryanchapin.com" target="_blank">Ryan Chapin</a></h4>
+
+<?php include( "../nbi_css_includes/css_layouts_preamble.html" ); ?>
+
+								<hr />
+								
+								<h3>3 Column: Fixed Side-Bars, Liquid Content Area, with Footer, no Header</h3>
+								
+								<hr />
+								
+								<h3>Shortcomings:</h3>
+
+								<p>This layout requires a border on the <span class="code">rightColumnBg</span> div for the background color in the right column to render properly under IE 6 and 7.  IE 6 required all edges to have a border, IE 7 just the top and bottom.  The work around, as far as incorporating the border into your design, is to simply set the color of the border to match the background color of that edge of your browser window.</p>
+
+								<p>IE 6 also requires an additional <span class="code">&lt;p&gt;</span> tag with an <span class="code">&amp;nbsp;</span> as the last line of markup in the <span class="code">sideBarLeft</span> div.  Without this &quot;empty&quot; p tag IE 6.0 takes the last line of HTML in that column's div and mangles it, rendering it towards the botto
+m of that column</p>
+
+								<p>See the comments in the CSS markup for more details</p>
+								
+								<hr />							
+
+<?php include( "../nbi_css_includes/css_layouts_license.html" ); ?>
+								
+								<hr />
+
+<?php include( "../nbi_css_includes/css_layouts_w3c_buttons.html" ); ?>
+								
+							</div>
+							<!-- centerColumn, END -->
+						
+						</div>
+						<!-- centerColumnContainer, END -->
+						
+						
+						<div id="sideBarRight">
+
+<?php include( "../nbi_css_includes/css_layouts_overview.html" ); ?>
+
+						</div>
+						<!-- sideBarRight, END -->
+
+					</div>
+					<!-- centerRightColumnPositioner, END -->			
+				</div>
+				<!-- centerRightColumnContainer, END -->
+			
+
+				<!-- The left column div -->			
+				<div id="sideBarLeft">
+
+<?php include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" ); ?>
+
+					<!-- Required so that IE 6.0 doesn't mangle the last entry of content in this column -->
+					<p>&nbsp;</p>
+					
+				</div>
+				<!-- sideBarLeft, END -->
+					
+				<div class="clear_both"></div>
+
+			</div>
+		</div>
+		<!-- rightColumnBg, and leftColumnBg (respectively), END -->	
+		<!--
+		For some reason, if I explicitly place a comments after the </div> for the
+		rightColumnBg, the page doesn't render in IE 7.0.
+		-->
+
+	</div>
+	<!-- mainContainer, END -->
+	
+</body>
+</html>

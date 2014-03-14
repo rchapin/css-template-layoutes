@@ -1,0 +1,43 @@
+#sideBar ul
+	{
+	margin: 0;
+	padding: 0;
+	border-bottom: #978e7c 1px solid;
+	width: 189px;
+	}
+
+/*
+ * IE fix for additional padding that otherwise get's rendered between list items
+ */
+#sideBar ul li
+	{
+	height: 1%;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	}
+
+#sideBarContentContainer> #sideBar
+	{
+	height: auto;
+	}
+	
+#sideBar ul li a, #sideBar ul li a:visited
+	{
+	display: block;
+	border-top: #978e7c 1px solid;
+	padding: 5px 10px;
+	background-image: url(sidenav.bg.gif);
+	background-position: bottom;
+	background-repeat:repeat-x;
+	background-color: #fffbf7;
+	color: #59503e;
+	text-decoration: none;
+	font-weight: bold;
+	}
+	
+#sideBar ul li a:hover
+	{
+	color: #000000;
+	text-decoration: underline;
+	}
