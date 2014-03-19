@@ -36,7 +36,7 @@ body
 	margin-top: 0;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 45px;
+	/* margin-bottom: 45px; */
 	}
 	
 #header
@@ -133,29 +133,65 @@ body
 </style>
 
 
+<script src="../LoggerJS/jquery/jquery-1.8.2.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+         //
+         // Instantiate the 'namespace' container object
+         //
+         var com = new Object();
+         com.ryanchapin = new Object()
+         com.ryanchapin.logger = new Object();
+</script>
+
+<script src="../LoggerJS/Logger.js" type="text/javascript"></script>
+
 <script language="javascript" type="text/javascript">
+
+         var $logger = new com.ryanchapin.logger.Logger("Logger");
+         $logger.setLogLevel('TRACE');
 
 function position_footer_div() {
 
+	var $mainContainer = document.getElementById("mainContainer");
+
 	var $innerHeight = window.innerHeight;
-	var $mainContainerHeight = document.getElementById("mainContainer").offsetHeight;	
+	var $mainContainerHeight = $mainContainer.offsetHeight;
+	var $winPageYOffset = window.pageYOffset;
 	var $footerHeight = document.getElementById("footer").offsetHeight;
 
-	// alert($innerHeight + ", " + $mainContainerHeight + "," + $footerHeight);
+	// First set the proper margin bottom for the mainContainer.div
+	$mainContainer.style.marginBottom = $footerHeight + 'px';
+
+	$logger.trace('innerHeight = ' + $innerHeight +
+		', mainContainerHeight = ' + $mainContainerHeight +
+		', footerHeight = ' + $footerHeight);
 
 	var $footer = document.getElementById("footer");
 	if ($mainContainerHeight <= ($innerHeight - $footerHeight)) {
+
 		// Show footer pegged to bottom of screen
-		// $footer.style.position = 'fixed';
+		$logger.trace('Show footer pegged');
 		$footer.style.bottom = 0;
 
-		// Check to see if we are scrolled down to the bottom and should
-		// be showing the footer.
-
 	} else {
-		// Hide the footer below the fold
-		var $offset = ($mainContainerHeight + $footerHeight) - $innerHeight;
-		$footer.style.bottom = (-1 * $offset) + 'px';
+
+		// $logger.debug('w+ih = ' + ($winPageYOffset + $innerHeight + $footerHeight) + ', m+fh = ' + ($mainContainerHeight));
+		// var $yOffAndInnerHeight = $winPageYOffset + $innerHeight;
+		// var $mchAndfh = $mainContainerHeight + $footerHeight;
+
+		var $offIhFh = $winPageYOffset + $innerHeight; 
+		$logger.debug('$offIhFh = ' + $offIhFh + ', $mainContainerHeight = ' + $mainContainerHeight);
+		if ($offIhFh >= $mainContainerHeight) {
+
+			$footer.style.bottom = (($offIhFh - $mainContainerHeight) - $footerHeight ) + 'px';
+		} else {
+
+			// Hide the footer below the fold
+			var $offset = ($mainContainerHeight + $footerHeight) - $innerHeight;
+			$logger.trace('offset = ' + $offset + ', winPageYOffset = ' + $winPageYOffset);
+			$footer.style.bottom = (-1 * $offset) + 'px';
+		}
 	}
 }
 
