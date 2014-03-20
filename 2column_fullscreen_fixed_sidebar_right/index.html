@@ -154,25 +154,7 @@ body
 	
 </style>
 
-<script src="../LoggerJS/jquery/jquery-1.8.2.js" type="text/javascript"></script>
-
 <script type="text/javascript">
-         //
-         // Instantiate the 'namespace' container object
-         //
-         var com = new Object();
-         com.ryanchapin = new Object();
-         com.ryanchapin.logger = new Object();
-</script>
-
-<script src="../LoggerJS/Logger.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-
-/*
-var $logger = new com.ryanchapin.logger.Logger("Logger");
-$logger.setLogLevel('TRACE');
-*/
 
 function position_footer_div() {
 
@@ -187,56 +169,27 @@ function position_footer_div() {
 	var $winPageYOffset;
 	if (typeof window.pageYOffset != 'undefined') {
 		$winPageYOffset = window.pageYOffset;
-		// alert("got it");
 	} else {
-		// alert("not got it");
 		$winPageYOffset = document.body.scrollTop;
 	}
-
-/*
-	var $winPageYOffset;
-	if ( isNan(window.pageYOffset) || window.pageYOffset === null || window.pageYOffset === undefined) {
-		$winPageYOffset = document.body.scrollTop;
-	} else {
-		$winPageYOffset = window.pageYOffset;
-	}
-*/
-	// $logger.trace('pageYOffset = ' + window.pageYOffset + ', scrollTop = ' + document.body.scrollTop);
-	// var $winPageYOffset = window.pageYOffset;
 
 	// First set the proper margin bottom for the mainContainer.div
 	$mainContainer.style.marginBottom = $footerHeight + 'px';
-
-/*
-	$logger.trace('innerHeight = ' + $innerHeight +
-		', mainContainerHeight = ' + $mainContainerHeight +
-		', footerHeight = ' + $footerHeight);
-*/
 
 	var $footer = document.getElementById("footer");
 	if ($mainContainerHeight <= ($innerHeight - $footerHeight)) {
 
 		// Show footer pegged to bottom of screen
-//		$logger.trace('Show footer pegged');
 		$footer.style.bottom = 0;
 
 	} else {
 
-		// $logger.debug('w+ih = ' + ($winPageYOffset + $innerHeight + $footerHeight) + ', m+fh = ' + ($mainContainerHeight));
-		// var $yOffAndInnerHeight = $winPageYOffset + $innerHeight;
-		// var $mchAndfh = $mainContainerHeight + $footerHeight;
-
 		var $offIhFh = $winPageYOffset + $innerHeight; 
-//		$logger.debug('$offIhFh = ' + $offIhFh + ', $mainContainerHeight = ' + $mainContainerHeight);
 		if ($offIhFh >= $mainContainerHeight) {
-
 			$footer.style.bottom = (($offIhFh - $mainContainerHeight) - $footerHeight ) + 'px';
-
 		} else {
-
 			// Hide the footer below the fold
 			var $offset = ($mainContainerHeight + $footerHeight) - $innerHeight;
-//			$logger.trace('offset = ' + $offset + ', winPageYOffset = ' + $winPageYOffset);
 			$footer.style.bottom = (-1 * $offset) + 'px';
 		}
 	}
