@@ -1,7 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+
+final class DisplayContent {
+   private function __construct() {}
+
+   const ALL          = 0;
+   const MAIN_CONTENT = 1;
+   const NAV_BAR      = 2;
+   const SIDE_BAR     = 3; 
+}
+
+//
+// Get the name of the page without the file extension.  It will be used as
+// key to determine what content to render on the page.
+//
+$selfArray = split("/", $_SERVER["PHP_SELF"]);
+$fileName = $selfArray[ count($selfArray) - 1 ];
+$page = substr($fileName, 0, strpos($fileName, "."));
+
+$displayContent;
+
+if ($page == "index") {
+	$displayContent = DisplayContent::ALL;
+} else if ($page == "main_content" ){
+	$displayContent = DisplayContent::MAIN_CONTENT;
+} else if ($page == "nav_bar" ){
+	$displayContent = DisplayContent::NAV_BAR;
+} else if ($page == "side_bar" ){
+	$displayContent = DisplayContent::SIDE_BAR;
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta charset="utf-8">
+
 <title>CSS 2 Column Fixed Width Layout That Works</title>
 
 <meta name="keywords" content="CSS, layout, design, 2 column, float, floats, clear, clears" />
@@ -32,11 +66,9 @@ body
 	{
 	width: 750px;
 	min-width: 750px;
-	/* margin: 0 auto; */
 	margin-top: 0;
 	margin-left: auto;
 	margin-right: auto;
-	/* margin-bottom: 45px; */
 	}
 	
 #header
@@ -52,20 +84,10 @@ body
 	
 #sideBarContentContainer
 	{
-	/* For a "two-stripe" look with columns of equal height, add your bg.gif here" */
-/*
-	background-image: url(columns.bg.gif); 
-	background-repeat: repeat-y;
-	background-position: right;
-*/
 	margin: 0 auto;;
 	padding: 0;
 	width: 750px;
-	/*
-	border-right: #000000 1px solid;
-	border-left: #000000 1px solid;
-	*/
-	border-bottom: #000000 1px solid;
+	/* border-bottom: #000000 1px solid; */
 	position: relative;
 	}
 
@@ -80,10 +102,10 @@ body
 /* IE 6.0: For some reason, if you just specify padding here it'll add 10 px */
 /* to the entire layout and cause the page to scroll horizontally            */
 #sideBar p
-        {
-        margin: 10px auto;
-        width: 170px;
-        }
+	{
+	margin: 10px auto;
+	width: 170px;
+	}
 	
 #content
 	{
@@ -132,7 +154,6 @@ body
 	
 </style>
 
-
 <script src="../LoggerJS/jquery/jquery-1.8.2.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -140,16 +161,18 @@ body
          // Instantiate the 'namespace' container object
          //
          var com = new Object();
-         com.ryanchapin = new Object()
+         com.ryanchapin = new Object();
          com.ryanchapin.logger = new Object();
 </script>
 
 <script src="../LoggerJS/Logger.js" type="text/javascript"></script>
 
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 
-         var $logger = new com.ryanchapin.logger.Logger("Logger");
-         $logger.setLogLevel('TRACE');
+/*
+var $logger = new com.ryanchapin.logger.Logger("Logger");
+$logger.setLogLevel('TRACE');
+*/
 
 function position_footer_div() {
 
@@ -157,21 +180,44 @@ function position_footer_div() {
 
 	var $innerHeight = window.innerHeight;
 	var $mainContainerHeight = $mainContainer.offsetHeight;
-	var $winPageYOffset = window.pageYOffset;
 	var $footerHeight = document.getElementById("footer").offsetHeight;
+
+	// Check to see how we will keep track of our scrolling.  IE8 does not
+	// support window.pageYOffset.
+	var $winPageYOffset;
+	if (typeof window.pageYOffset != 'undefined') {
+		$winPageYOffset = window.pageYOffset;
+		// alert("got it");
+	} else {
+		// alert("not got it");
+		$winPageYOffset = document.body.scrollTop;
+	}
+
+/*
+	var $winPageYOffset;
+	if ( isNan(window.pageYOffset) || window.pageYOffset === null || window.pageYOffset === undefined) {
+		$winPageYOffset = document.body.scrollTop;
+	} else {
+		$winPageYOffset = window.pageYOffset;
+	}
+*/
+	// $logger.trace('pageYOffset = ' + window.pageYOffset + ', scrollTop = ' + document.body.scrollTop);
+	// var $winPageYOffset = window.pageYOffset;
 
 	// First set the proper margin bottom for the mainContainer.div
 	$mainContainer.style.marginBottom = $footerHeight + 'px';
 
+/*
 	$logger.trace('innerHeight = ' + $innerHeight +
 		', mainContainerHeight = ' + $mainContainerHeight +
 		', footerHeight = ' + $footerHeight);
+*/
 
 	var $footer = document.getElementById("footer");
 	if ($mainContainerHeight <= ($innerHeight - $footerHeight)) {
 
 		// Show footer pegged to bottom of screen
-		$logger.trace('Show footer pegged');
+//		$logger.trace('Show footer pegged');
 		$footer.style.bottom = 0;
 
 	} else {
@@ -181,15 +227,16 @@ function position_footer_div() {
 		// var $mchAndfh = $mainContainerHeight + $footerHeight;
 
 		var $offIhFh = $winPageYOffset + $innerHeight; 
-		$logger.debug('$offIhFh = ' + $offIhFh + ', $mainContainerHeight = ' + $mainContainerHeight);
+//		$logger.debug('$offIhFh = ' + $offIhFh + ', $mainContainerHeight = ' + $mainContainerHeight);
 		if ($offIhFh >= $mainContainerHeight) {
 
 			$footer.style.bottom = (($offIhFh - $mainContainerHeight) - $footerHeight ) + 'px';
+
 		} else {
 
 			// Hide the footer below the fold
 			var $offset = ($mainContainerHeight + $footerHeight) - $innerHeight;
-			$logger.trace('offset = ' + $offset + ', winPageYOffset = ' + $winPageYOffset);
+//			$logger.trace('offset = ' + $offset + ', winPageYOffset = ' + $winPageYOffset);
 			$footer.style.bottom = (-1 * $offset) + 'px';
 		}
 	}
@@ -217,35 +264,38 @@ window.onscroll = position_footer_div;
 		<div id="sideBarContentContainer">
 		
 			<div id="sideBar">
+<?php
 
-<?php include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" ); ?>
+switch ($displayContent) {
 
+	case DisplayContent::ALL :
+	case DisplayContent::NAV_BAR :
+		include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" );
+		break;
+
+	case DisplayContent::MAIN_CONTENT :
+		print "<!-- We must include some markup in this column if it is to be blank -->
+<!-- to maintain the layout.                                         -->
+<p></p>";
+		break;
+}
+
+?>
 			</div>
 			<!-- sideBar, END -->
 			
 			<div id="content">
 
-<?php include( "../nbi_css_includes/css_layouts_preamble.html" ); ?>
+<?php 
 
-                        <hr />
+switch ($displayContent) {
+	case DisplayContent::ALL :
+	case DisplayContent::MAIN_CONTENT :
+		include("main_content.php");
+		break;
+}
 
-                        <h3>2 Column: Fixed Width with Right Side Bar, Content Area, and Footer that is Fixed to the Bottom of the Page</h3>
-
-                        <p>A straight-forward CSS layout.  Because of the fixed widths this one doesn't seem to have problems with any modern browsers.</p>
-
-                        <p>See the CSS markup for more details on this layout.</p>
-
-                        <hr />
-
-<?php // include( "../nbi_css_includes/css_layouts_overview.html" ); ?>
-
-                        <hr />
-
-<?php // include( "../nbi_css_includes/css_layouts_license.html" ); ?>
-
-                        <hr />
-
-<?php // include( "../nbi_css_includes/css_layouts_w3c_buttons.html" ); ?>
+?>
 
 			</div>
 			<!-- content, END -->
