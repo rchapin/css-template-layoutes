@@ -22,11 +22,20 @@
 							<ul>
 								<li><strong>Windows XP, 7</strong>
 									<ul>
+										<li>Internet Explorer 7 (IE 7)</li>
 										<li>Internet Explorer 8 (IE 8)</li>
+										<li>Internet Explorer 9 (IE 8)</li>
+										<li>Internet Explorer 10 (IE 10)</li>
 										<li>Internet Explorer 11 (IE 11)</li>
-										<li>Firefox 12 or greater<li>
+										<li>Chrome 33.0</li>
+										<li>Firefox 12, 28 or greater</li>
 									</ul>
 								</li>
+								<li><strong>Mac OS X</strong>
+									<ul>
+										<li>Safari 1.2.3</li>
+									</ul>
+
 								<li><strong>Linux</strong>
 									<ul>
 										<li>Firefox 27.x or greater</li>
