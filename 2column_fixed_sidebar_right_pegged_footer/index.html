@@ -1,7 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php include( "../nbi_css_includes/display_content.php" ); ?>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta charset="utf-8">
+
 <title>CSS 2 Column Fixed Width Layout That Works</title>
 
 <meta name="keywords" content="CSS, layout, design, 2 column, float, floats, clear, clears" />
@@ -13,11 +16,24 @@
 
 /* ============================================================================ */
 /* Layout Styles */	
+
+body
+   {
+   margin: 0;
+   padding: 0;
+
+   height: 100%;
+
+   /* For a "two-stripe" look with columns of equal height, add your bg.gif here" */
+   background-image: url(columns.bg.gif);
+   background-repeat: repeat-y;
+   background-position: center;
+   }
+
 #mainContainer
 	{
 	width: 750px;
 	min-width: 750px;
-	/* margin: 0 auto; */
 	margin-top: 0;
 	margin-left: auto;
 	margin-right: auto;
@@ -37,15 +53,9 @@
 	
 #sideBarContentContainer
 	{
-	/* For a "two-stripe" look with columns of equal height, add your bg.gif here" */
-	background-image: url(columns.bg.gif); 
-	background-repeat: repeat-y;
-	background-position: right;
 	margin: 0 auto;;
 	padding: 0;
-	width: 748px; /* Original width of 750px (the total width of the page) - the width of the border (2px)*/
-	border-right: #000000 1px solid;
-	border-left: #000000 1px solid;
+	width: 750px;
 	position: relative;
 	}
 
@@ -101,7 +111,7 @@
 	margin: 0;
 	padding: 0;
 	border-bottom: #978e7c 1px solid;
-	width: 189px;
+	width: 188px;
 	position: relative;
 	left: 1px;
 	}
@@ -124,35 +134,39 @@
 		
 			<div id="sideBar">
 
-<?php include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" ); ?>
+<?php
+
+switch ($displayContent) {
+
+   case DisplayContent::ALL :
+   case DisplayContent::NAV_BAR :
+      include( "../nbi_css_includes/css_layouts_nbi_sidenav.html" );
+      break;
+
+   case DisplayContent::MAIN_CONTENT :
+      print "<!-- We must include some markup in this column if it is to be blank -->
+<!-- to maintain the layout.                                         -->
+<p></p>";
+      break;
+}
+
+?>
 
 			</div>
 			<!-- sideBar, END -->
 			
 			<div id="content">
 
-<?php include( "../nbi_css_includes/css_layouts_preamble.html" ); ?>
+<?php 
 
-                        <hr />
+switch ($displayContent) {
+   case DisplayContent::ALL :
+   case DisplayContent::MAIN_CONTENT :
+      include("main_content.php");
+      break;
+}
 
-                        <h3>2 Column: Fixed Width with Right Side Bar, Content Area, and Footer that is Fixed to the Bottom of the Page</h3>
-
-                        <p>A straight-forward CSS layout.  Because of the fixed widths this one doesn't seem to have problems with any modern browsers.</p>
-
-                        <p>See the CSS markup for more details on this layout.</p>
-
-                        <hr />
-
-<?php include( "../nbi_css_includes/css_layouts_overview.html" ); ?>
-
-                        <hr />
-
-<?php include( "../nbi_css_includes/css_layouts_license.html" ); ?>
-
-                        <hr />
-
-<?php include( "../nbi_css_includes/css_layouts_w3c_buttons.html" ); ?>
-
+?>
 			</div>
 			<!-- content, END -->
 		
